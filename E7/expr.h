@@ -12,3 +12,7 @@ struct expr {
 	struct expr *right;
 	int value;
 };
+
+struct expr * expr_create( expr_t kind, struct expr *left, struct expr *right);
+
+struct expr * expr_create_value(int value);

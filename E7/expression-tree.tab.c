@@ -68,13 +68,17 @@
    /* a given program is standards compliant. */
 
    #include <stdio.h>
-   #include <stdlib.h>
    #include "expr.h"
-   #define YYSTYPE struct expr *
 
    struct expr * parser_result = 0;
+	
+   void yyerror(const char * msg){
+	fprintf(stderr, "%s\n", msg);
+}
 
-#line 78 "expression-tree.tab.c" /* yacc.c:339  */
+   extern int yylex();
+
+#line 82 "expression-tree.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -123,7 +127,18 @@ extern int yydebug;
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+
+union YYSTYPE
+{
+#line 18 "expression-tree.y" /* yacc.c:355  */
+
+	struct expr * exprv;
+	int v;
+
+#line 139 "expression-tree.tab.c" /* yacc.c:355  */
+};
+
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -137,7 +152,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 141 "expression-tree.tab.c" /* yacc.c:358  */
+#line 156 "expression-tree.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -435,8 +450,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    27,    27,    30,    31,    32,    35,    36,    37,    40,
-      41,    42
+       0,    38,    38,    41,    42,    43,    46,    47,    48,    51,
+      52,    53
 };
 #endif
 
@@ -1214,67 +1229,67 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 27 "expression-tree.y" /* yacc.c:1646  */
-    { parser_result = (yyvsp[-1]); }
-#line 1220 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 38 "expression-tree.y" /* yacc.c:1646  */
+    { parser_result = (yyvsp[-1].exprv); }
+#line 1235 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 30 "expression-tree.y" /* yacc.c:1646  */
-    { (yyval) = expr_create(EXPR_ADD,(yyvsp[-2]),(yyvsp[0])); }
-#line 1226 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 41 "expression-tree.y" /* yacc.c:1646  */
+    { (yyval.exprv) = expr_create(EXPR_ADD,(yyvsp[-2].exprv),(yyvsp[0].exprv)); }
+#line 1241 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 31 "expression-tree.y" /* yacc.c:1646  */
-    { (yyval) = expr_create(EXPR_SUBTRACT,(yyvsp[-2]),(yyvsp[0])); }
-#line 1232 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 42 "expression-tree.y" /* yacc.c:1646  */
+    { (yyval.exprv) = expr_create(EXPR_SUBTRACT,(yyvsp[-2].exprv),(yyvsp[0].exprv)); }
+#line 1247 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 32 "expression-tree.y" /* yacc.c:1646  */
-    { (yyval) = (yyvsp[0]); }
-#line 1238 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 43 "expression-tree.y" /* yacc.c:1646  */
+    { (yyval.exprv) = (yyvsp[0].exprv); }
+#line 1253 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 35 "expression-tree.y" /* yacc.c:1646  */
-    { (yyval) = expr_create(EXPR_MULTIPLY,(yyvsp[-2]),(yyvsp[0])); }
-#line 1244 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 46 "expression-tree.y" /* yacc.c:1646  */
+    { (yyval.exprv) = expr_create(EXPR_MULTIPLY,(yyvsp[-2].exprv),(yyvsp[0].exprv)); }
+#line 1259 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 36 "expression-tree.y" /* yacc.c:1646  */
-    { (yyval) = expr_create(EXPR_DIVIDE,(yyvsp[-2]),(yyvsp[0])); }
-#line 1250 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 47 "expression-tree.y" /* yacc.c:1646  */
+    { (yyval.exprv) = expr_create(EXPR_DIVIDE,(yyvsp[-2].exprv),(yyvsp[0].exprv)); }
+#line 1265 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 37 "expression-tree.y" /* yacc.c:1646  */
-    { (yyval) = (yyvsp[0]); }
-#line 1256 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 48 "expression-tree.y" /* yacc.c:1646  */
+    { (yyval.exprv) = (yyvsp[0].exprv); }
+#line 1271 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 40 "expression-tree.y" /* yacc.c:1646  */
-    { (yyval) = expr_create(EXPR_SUBTRACT,0,(yyvsp[0])); }
-#line 1262 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 51 "expression-tree.y" /* yacc.c:1646  */
+    { (yyval.exprv) = expr_create(EXPR_SUBTRACT,0,(yyvsp[0].exprv)); }
+#line 1277 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 41 "expression-tree.y" /* yacc.c:1646  */
-    { (yyval) = (yyvsp[-1]); }
-#line 1268 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 52 "expression-tree.y" /* yacc.c:1646  */
+    { (yyval.exprv) = (yyvsp[-1].exprv); }
+#line 1283 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 42 "expression-tree.y" /* yacc.c:1646  */
-    { (yyval) = expr_create_value( atoi(yytext) ); }
-#line 1274 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 53 "expression-tree.y" /* yacc.c:1646  */
+    { (yyval.exprv) = expr_create_value( (yyvsp[0].v) ); }
+#line 1289 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1278 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 1293 "expression-tree.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1502,6 +1517,6 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 45 "expression-tree.y" /* yacc.c:1906  */
+#line 56 "expression-tree.y" /* yacc.c:1906  */
 
 
