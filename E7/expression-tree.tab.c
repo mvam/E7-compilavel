@@ -62,17 +62,19 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 1 "expression-tree.y" /* yacc.c:339  */
+#line 2 "expression-tree.y" /* yacc.c:339  */
 
-   // validador: a program used to determine whether
-   // a given program is standards compliant.
+   /* validador: a program used to determine whether */
+   /* a given program is standards compliant. */
 
    #include <stdio.h>
+   #include <stdlib.h>
    #include "expr.h"
    #define YYSTYPE struct expr *
-   struct expr parser_result;
 
-#line 76 "expression-tree.tab.c" /* yacc.c:339  */
+   struct expr * parser_result = 0;
+
+#line 78 "expression-tree.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -109,29 +111,13 @@ extern int yydebug;
   {
     TOKEN_ERROR = 258,
     TOKEN_INT = 259,
-    TOKEN_ID = 260,
-    TOKEN_PLUS = 261,
-    TOKEN_MINUS = 262,
-    TOKEN_MULT = 263,
-    TOKEN_DIV = 264,
-    TOKEN_LESSTHEN = 265,
-    TOKEN_GREATHEN = 266,
-    TOKEN_IQUAL = 267,
-    TOKEN_SEMI = 268,
-    TOKEN_OPENP = 269,
-    TOKEN_CLOSEP = 270,
-    TOKEN_COMMA = 271,
-    TOKEN_LSQLBRACK = 272,
-    TOKEN_RSQLBRACK = 273,
-    TOKEN_LBRACK = 274,
-    TOKEN_RBRACK = 275,
-    TOKEN_KEY_IF = 276,
-    TOKEN_KEY_ELSE = 277,
-    TOKEN_KEY_INT = 278,
-    TOKEN_KEY_RETURN = 279,
-    TOKEN_KEY_VOID = 280,
-    TOKEN_KEY_WHILE = 281,
-    TOKEN_KEY_DO = 282
+    TOKEN_PLUS = 260,
+    TOKEN_MINUS = 261,
+    TOKEN_MULT = 262,
+    TOKEN_DIV = 263,
+    TOKEN_SEMI = 264,
+    TOKEN_OPENP = 265,
+    TOKEN_CLOSEP = 266
   };
 #endif
 
@@ -151,7 +137,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 155 "expression-tree.tab.c" /* yacc.c:358  */
+#line 141 "expression-tree.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -393,10 +379,10 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  10
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   16
+#define YYLAST   17
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  28
+#define YYNTOKENS  12
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  5
 /* YYNRULES -- Number of rules.  */
@@ -407,7 +393,7 @@ union yyalloc
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   282
+#define YYMAXUTOK   266
 
 #define YYTRANSLATE(YYX)                                                \
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -442,17 +428,15 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25,    26,    27
+       5,     6,     7,     8,     9,    10,    11
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    42,    42,    45,    46,    47,    50,    51,    52,    55,
-      56,    57
+       0,    27,    27,    30,    31,    32,    35,    36,    37,    40,
+      41,    42
 };
 #endif
 
@@ -461,13 +445,9 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "TOKEN_ERROR", "TOKEN_INT", "TOKEN_ID",
-  "TOKEN_PLUS", "TOKEN_MINUS", "TOKEN_MULT", "TOKEN_DIV", "TOKEN_LESSTHEN",
-  "TOKEN_GREATHEN", "TOKEN_IQUAL", "TOKEN_SEMI", "TOKEN_OPENP",
-  "TOKEN_CLOSEP", "TOKEN_COMMA", "TOKEN_LSQLBRACK", "TOKEN_RSQLBRACK",
-  "TOKEN_LBRACK", "TOKEN_RBRACK", "TOKEN_KEY_IF", "TOKEN_KEY_ELSE",
-  "TOKEN_KEY_INT", "TOKEN_KEY_RETURN", "TOKEN_KEY_VOID", "TOKEN_KEY_WHILE",
-  "TOKEN_KEY_DO", "$accept", "program", "expr", "term", "factor", YY_NULLPTR
+  "$end", "error", "$undefined", "TOKEN_ERROR", "TOKEN_INT", "TOKEN_PLUS",
+  "TOKEN_MINUS", "TOKEN_MULT", "TOKEN_DIV", "TOKEN_SEMI", "TOKEN_OPENP",
+  "TOKEN_CLOSEP", "$accept", "program", "expr", "term", "factor", YY_NULLPTR
 };
 #endif
 
@@ -477,15 +457,14 @@ static const char *const yytname[] =
 static const yytype_uint16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275,   276,   277,   278,   279,   280,   281,   282
+     265,   266
 };
 # endif
 
-#define YYPACT_NINF -5
+#define YYPACT_NINF -8
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-5)))
+  (!!((Yystate) == (-8)))
 
 #define YYTABLE_NINF -1
 
@@ -496,9 +475,9 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-       0,    -5,     0,     0,     8,    -4,    -3,    -5,    -5,     1,
-      -5,     0,     0,    -5,     0,     0,    -5,    -3,    -3,    -5,
-      -5
+      -1,    -8,    -1,    -1,     2,     1,     7,    -8,    -8,    -7,
+      -8,    -1,    -1,    -8,    -1,    -1,    -8,     7,     7,    -8,
+      -8
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -514,7 +493,7 @@ static const yytype_uint8 yydefact[] =
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -5,    -5,    -5,    -1,    -2
+      -8,    -8,    -8,     5,    -2
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
@@ -528,30 +507,30 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-       8,     9,    11,    12,     1,    14,    15,     2,    10,    13,
-      17,    18,    19,    20,     3,     0,    16
+       8,     9,    10,     1,    16,     2,    11,    12,     0,     3,
+      13,     0,    19,    20,    14,    15,    17,    18
 };
 
 static const yytype_int8 yycheck[] =
 {
-       2,     3,     6,     7,     4,     8,     9,     7,     0,    13,
-      11,    12,    14,    15,    14,    -1,    15
+       2,     3,     0,     4,    11,     6,     5,     6,    -1,    10,
+       9,    -1,    14,    15,     7,     8,    11,    12
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     4,     7,    14,    29,    30,    31,    32,    32,    32,
-       0,     6,     7,    13,     8,     9,    15,    31,    31,    32,
-      32
+       0,     4,     6,    10,    13,    14,    15,    16,    16,    16,
+       0,     5,     6,     9,     7,     8,    11,    15,    15,    16,
+      16
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    28,    29,    30,    30,    30,    31,    31,    31,    32,
-      32,    32
+       0,    12,    13,    14,    14,    14,    15,    15,    15,    16,
+      16,    16
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -1235,67 +1214,67 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 42 "expression-tree.y" /* yacc.c:1646  */
+#line 27 "expression-tree.y" /* yacc.c:1646  */
     { parser_result = (yyvsp[-1]); }
-#line 1241 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 1220 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 45 "expression-tree.y" /* yacc.c:1646  */
+#line 30 "expression-tree.y" /* yacc.c:1646  */
     { (yyval) = expr_create(EXPR_ADD,(yyvsp[-2]),(yyvsp[0])); }
-#line 1247 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 1226 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 46 "expression-tree.y" /* yacc.c:1646  */
+#line 31 "expression-tree.y" /* yacc.c:1646  */
     { (yyval) = expr_create(EXPR_SUBTRACT,(yyvsp[-2]),(yyvsp[0])); }
-#line 1253 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 1232 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 47 "expression-tree.y" /* yacc.c:1646  */
+#line 32 "expression-tree.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[0]); }
-#line 1259 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 1238 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 50 "expression-tree.y" /* yacc.c:1646  */
+#line 35 "expression-tree.y" /* yacc.c:1646  */
     { (yyval) = expr_create(EXPR_MULTIPLY,(yyvsp[-2]),(yyvsp[0])); }
-#line 1265 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 1244 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 51 "expression-tree.y" /* yacc.c:1646  */
+#line 36 "expression-tree.y" /* yacc.c:1646  */
     { (yyval) = expr_create(EXPR_DIVIDE,(yyvsp[-2]),(yyvsp[0])); }
-#line 1271 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 1250 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 52 "expression-tree.y" /* yacc.c:1646  */
+#line 37 "expression-tree.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[0]); }
-#line 1277 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 1256 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 55 "expression-tree.y" /* yacc.c:1646  */
+#line 40 "expression-tree.y" /* yacc.c:1646  */
     { (yyval) = expr_create(EXPR_SUBTRACT,0,(yyvsp[0])); }
-#line 1283 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 1262 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 56 "expression-tree.y" /* yacc.c:1646  */
+#line 41 "expression-tree.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[-1]); }
-#line 1289 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 1268 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 57 "expression-tree.y" /* yacc.c:1646  */
-    { (yyval) = expr_create_value(atoi(yytext)); }
-#line 1295 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 42 "expression-tree.y" /* yacc.c:1646  */
+    { (yyval) = expr_create_value( atoi(yytext) ); }
+#line 1274 "expression-tree.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1299 "expression-tree.tab.c" /* yacc.c:1646  */
+#line 1278 "expression-tree.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1523,6 +1502,6 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 60 "expression-tree.y" /* yacc.c:1906  */
+#line 45 "expression-tree.y" /* yacc.c:1906  */
 
 

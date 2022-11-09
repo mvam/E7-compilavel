@@ -13,7 +13,7 @@
 [0-9]+	{ return TOKEN_INT;  }
 "+" 	{ return TOKEN_PLUS;  }
 "-" 	{ return TOKEN_MINUS;  }
-"*" 	{ return TOKEN_MUL;  }
+"*" 	{ return TOKEN_MULT;  }
 "/" 	{ return TOKEN_DIV; }
 "(" 	{ return TOKEN_OPENP; }
 ")" 	{ return TOKEN_CLOSEP; }

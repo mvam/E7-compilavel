@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include "expr.h"
 
+extern struct expr* parser_result;
 extern int yyparse();
 
-// definir função expr_print
+/* definir função expr_print */
 void expr_print (struct expr *e) {
 	if(!e) return;
 
@@ -25,7 +26,6 @@ void expr_print (struct expr *e) {
 int main() {
     if (yyparse()==0)
        expr_print(parser_result); 
-       // substituir essa mensagem pela chamada à função expr_print.
     else 
        printf("Parse failed.\n"); 
 }
